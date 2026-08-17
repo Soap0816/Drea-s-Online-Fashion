@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Drea Online Fashion — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory:#FAF7F1; --surface:#fff; --charcoal:#1D1B18;
+    --forest:#243B2E; --forest-light:#2F4B3A; --forest-dark:#162419;
+    --brass:#B8863F; --brass-light:#D2A45E; --brass-dark:#8F6A2F;
+    --taupe:#A79A89; --line:#E7E0D4; --error:#A23B33;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Public Sans',sans-serif; background:var(--ivory); color:var(--charcoal); }
+  h1,h2,h3,h4 { font-family:'Fraunces',serif; font-weight:400; margin:0; }
+  .container { max-width:1300px; margin:0 auto; padding:0 20px; }
+  a { color:inherit; text-decoration:none; }
+  .banner { background:var(--brass); color:var(--ivory); text-align:center; font-size:13px; padding:8px 16px; }
+  header { position:sticky; top:0; z-index:50; background:rgba(250,247,241,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .header-inner { display:flex; align-items:center; justify-content:space-between; height:68px; gap:16px; }
+  .logo { font-family:'Fraunces',serif; font-size:20px; }
+  nav.desktop { display:flex; gap:22px; flex:1; justify-content:center; flex-wrap:wrap; }
+  nav.desktop a { font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:rgba(29,27,24,.8); cursor:pointer; }
+  nav.desktop a:hover, nav.desktop a.active { color:var(--forest); }
+  .header-icons { display:flex; align-items:center; gap:14px; }
+  .icon-btn { position:relative; background:none; border:none; cursor:pointer; padding:6px; color:var(--charcoal); }
+  .badge { position:absolute; top:-2px; right:-2px; background:var(--brass); color:#fff; font-size:10px; font-weight:700; border-radius:999px; min-width:16px; height:16px; display:flex; align-items:center; justify-content:center; padding:0 3px; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 26px; font-size:13px; letter-spacing:.05em; text-transform:uppercase; font-weight:600; border:none; cursor:pointer; transition:.2s; }
+  .btn-primary { background:var(--forest); color:var(--ivory); } .btn-primary:hover { background:var(--forest-dark); }
+  .btn-brass { background:var(--brass); color:var(--ivory); } .btn-brass:hover { background:var(--brass-dark); }
+  .btn-outline { background:transparent; border:1px solid var(--charcoal); color:var(--charcoal); } .btn-outline:hover { background:var(--charcoal); color:var(--ivory); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; }
+  .hero { background:var(--forest); color:var(--ivory); }
+  .hero-inner { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; padding:70px 0; }
+  .hero-inner img { width:100%; aspect-ratio:4/5; object-fit:cover; }
+  .eyebrow { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--brass-light); font-weight:600; margin-bottom:12px; }
+  .hero h1 { font-size:52px; line-height:1.05; margin-bottom:20px; }
+  .hero p.tagline { font-family:'Fraunces',serif; font-style:italic; font-size:18px; color:rgba(250,247,241,.85); max-width:420px; margin-bottom:30px; }
+  .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+  section.pad { padding:56px 0; }
+  .section-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:24px; }
+  .cats { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+  .cat-card { border:1px solid var(--line); text-align:center; padding:24px 12px; font-size:13px; text-transform:uppercase; letter-spacing:.05em; cursor:pointer; }
+  .cat-card:hover { border-color:var(--forest); color:var(--forest); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:24px 20px; }
+  .card { cursor:pointer; }
+  .card .img-wrap { position:relative; aspect-ratio:3/4; background:var(--line); overflow:hidden; }
+  .card img { width:100%; height:100%; object-fit:cover; transition:.4s; }
+  .card:hover img { transform:scale(1.05); }
+  .tag { position:absolute; top:10px; left:10px; font-size:10px; text-transform:uppercase; letter-spacing:.05em; padding:4px 8px; background:var(--forest); color:#fff; }
+  .tag.brass { background:var(--brass); }
+  .stock-strip { position:absolute; bottom:0; left:0; right:0; text-align:center; font-size:10px; text-transform:uppercase; letter-spacing:.05em; padding:5px; }
+  .stock-strip.preorder { background:rgba(184,134,63,.92); color:#fff; }
+  .stock-strip.out { background:rgba(29,27,24,.88); color:#fff; }
+  .card-info { margin-top:10px; }
+  .card-info .name { font-size:14px; margin-bottom:4px; }
+  .card-info .price { font-weight:700; color:var(--forest-dark); font-size:14px; }
+  footer { background:var(--forest); color:var(--ivory); margin-top:60px; }
+  .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:32px; padding:50px 0; }
+  .footer-grid a { display:block; font-size:13px; color:rgba(250,247,241,.8); margin-bottom:8px; }
+  .footer-bottom { border-top:1px solid rgba(250,247,241,.15); padding:16px 0; font-size:12px; color:rgba(250,247,241,.6); text-align:center; }
+  .whatsapp-fab { position:fixed; bottom:20px; right:20px; width:54px; height:54px; border-radius:999px; background:#25D366; display:flex; align-items:center; justify-content:center; color:#fff; box-shadow:0 4px 14px rgba(0,0,0,.2); cursor:pointer; z-index:40; }
+  .overlay { position:fixed; inset:0; background:rgba(29,27,24,.5); z-index:100; display:flex; justify-content:flex-end; }
+  .overlay.center { align-items:center; justify-content:center; }
+  .panel { background:var(--ivory); width:100%; max-width:420px; height:100%; overflow-y:auto; padding:24px; }
+  .panel.wide { max-width:820px; height:auto; max-height:92vh; border-radius:2px; }
+  .panel-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+  .close-btn { background:none; border:none; font-size:22px; cursor:pointer; color:var(--charcoal); }
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-size:13px; margin-bottom:6px; }
+  .field input, .field select, .field textarea { width:100%; border:1px solid var(--line); padding:10px 12px; font-size:14px; font-family:inherit; background:#fff; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline:none; border-color:var(--forest); }
+  .req { color:var(--error); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .pill-group { display:flex; gap:8px; flex-wrap:wrap; }
+  .pill { border:1px solid var(--line); padding:9px 14px; font-size:13px; cursor:pointer; }
+  .pill.active { border-color:var(--forest); background:var(--forest); color:#fff; }
+  .pill.disabled { color:#bbb; text-decoration:line-through; cursor:not-allowed; }
+  .summary-line { display:flex; justify-content:space-between; font-size:14px; padding:6px 0; }
+  .summary-line.total { font-weight:700; font-size:16px; border-top:1px solid var(--line); padding-top:10px; margin-top:6px; }
+  .cart-line { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .cart-line img { width:64px; height:76px; object-fit:cover; background:var(--line); }
+  .cart-line .qty { display:flex; align-items:center; border:1px solid var(--line); width:fit-content; margin-top:8px; }
+  .cart-line .qty button { width:28px; height:28px; border:none; background:none; cursor:pointer; font-size:15px; }
+  .notice-box { font-size:13px; color:rgba(29,27,24,.7); background:rgba(184,134,63,.08); padding:12px 14px; margin:14px 0; }
+  .badge-chip { font-size:10px; text-transform:uppercase; letter-spacing:.04em; padding:3px 8px; background:rgba(184,134,63,.15); color:var(--brass-dark); }
+  .demo-note { position:fixed; bottom:0; left:0; right:0; background:var(--charcoal); color:var(--ivory); font-size:12px; text-align:center; padding:8px; z-index:200; }
+  @media (max-width:820px){ .hero-inner{grid-template-columns:1fr;} .hero h1{font-size:38px;} nav.desktop{display:none;} .row2{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="banner">PREVIEW MODE — visual demo only. No real orders, payments, or data are processed here.</div>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo">Drea Online Fashion</div>
+    <nav class="desktop">
+      <a onclick="goTo('shop')">Shop All</a>
+      <a onclick="goTo('shop','dresses')">Dresses</a>
+      <a onclick="goTo('shop','jumpsuits')">Jumpsuits</a>
+      <a onclick="goTo('shop','sets')">Sets</a>
+      <a onclick="goTo('oway')">Order What You Want</a>
+    </nav>
+    <div class="header-icons">
+      <input id="searchBox" placeholder="Search" oninput="onSearch(this.value)" style="border:1px solid var(--line);padding:8px 10px;font-size:13px;width:130px;">
+      <button class="icon-btn" onclick="goTo('cart')" aria-label="cart">
+        🛍️<span class="badge" id="cartBadge" style="display:none;">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="app"></div>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3 style="font-size:18px;margin-bottom:10px;">Drea Online Fashion</h3>
+      <p style="font-size:13px;color:rgba(250,247,241,.75);">Style made for you. Discover your next favorite look.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Shop</p>
+      <a onclick="goTo('shop')">Shop All</a>
+      <a onclick="goTo('shop','dresses')">Dresses</a>
+      <a onclick="goTo('oway')">Order What You Want</a>
+    </div>
+    <div>
+      <p class="eyebrow">Contact</p>
+      <a href="#">@drea_online_fashion</a>
+      <a href="#">WhatsApp Us</a>
+    </div>
+    <div>
+      <p class="eyebrow">Delivery</p>
+      <a>Local delivery via oDeliver</a>
+      <a>Pickup available</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Drea Online Fashion. Preview build.</div>
+</footer>
+
+<div class="whatsapp-fab" onclick="alert('In the live site this opens WhatsApp with your configured number.')">💬</div>
+<div class="demo-note">This is a static visual preview. The real app (cart, checkout, admin, Discord notifications, oDeliver rates) runs from the code project — see README for `npm run dev`.</div>
+
+<script>
+/* ---------- Demo data ---------- */
+const PRODUCTS = [
+  { id:1, name:"Floral Ruched Maxi Dress", slug:"floral-ruched-maxi-dress", price:220, category:"dresses", img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80", sizes:["S","M","L"], colours:[], desc:"Strapless coral floral maxi dress with a ruched bodice and thigh-high slit.", featured:true, isNew:true, variants:{} },
+  { id:2, name:"Zebra Print Halter Jumpsuit", slug:"zebra-print-halter-jumpsuit", price:240, category:"jumpsuits", img:"https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?w=600&q=80", sizes:["S","M","L","XL"], colours:[], desc:"Deep-V halter jumpsuit in a bold zebra print with a flared leg.", featured:true, isNew:false, variants:{"L":"preorder","XL":"out_of_stock"} },
+  { id:3, name:"Emerald Cut-Out Maxi Dress", slug:"emerald-cutout-maxi-dress", price:220, category:"dresses", img:"https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80", sizes:["S","M","L"], colours:["Emerald","Black"], desc:"Sultry halter maxi dress with a side cut-out and high slit.", featured:true, isNew:true,
+    variants:{"S|Emerald":"in_stock","M|Emerald":"preorder","L|Emerald":"out_of_stock","S|Black":"in_stock","M|Black":"in_stock","L|Black":"preorder"} },
+  { id:4, name:"Sunset Print Ruched Dress", slug:"sunset-print-ruched-dress", price:220, category:"dresses", img:"https://images.unsplash.com/photo-1550639525-c97d455acf70?w=600&q=80", sizes:["M","L"], colours:[], desc:"Orange and green abstract print maxi dress with a flowing skirt.", featured:false, isNew:false, variants:{} },
+  { id:5, name:"Floral Chain-Strap Midi Set", slug:"floral-chain-strap-midi-set", price:250, category:"sets", img:"https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=600&q=80", sizes:["S","M"], colours:[], desc:"Pastel floral cowl-neck top with chain straps and a matching midi skirt.", featured:true, isNew:false, variants:{} },
+  { id:6, name:"Teal Ruched Halter Dress", slug:"teal-ruched-halter-dress", price:285, category:"dresses", img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80&sat=-30", sizes:["S","M"], colours:[], desc:"Deep teal halter dress with a plunging neckline, cut just above the knee.", featured:true, isNew:false, variants:{"M":"preorder"} },
+];
+
+const LOCATION_RATES = {
+  standard: { urban:{small:30,medium:45}, rural:{small:40,medium:55}, extended:{small:50,medium:65}, remote:{small:60,medium:75}, tobago:{small:60,medium:75} },
+  corporate: { urban:{small:35,medium:50}, rural:{small:45,medium:60}, extended:{small:55,medium:70}, remote:{small:65,medium:80}, tobago:{small:65,medium:80} },
+};
+const TIER_LABELS = { urban:"Urban", rural:"Rural", extended:"Extended", remote:"Remote", tobago:"Tobago" };
+const ACCOUNT_TYPE = "standard"; // matches oDeliver screenshot rate card
+const COD_SURCHARGE_PCT = 3;
+
+let state = { page:"home", search:"", categoryFilter:null, cart:[], activeProduct:null, lastOrderNumber:null };
+
+function money(n){ return "TT$" + n.toFixed(2); }
+function findProduct(slug){ return PRODUCTS.find(p=>p.slug===slug); }
+function stockFor(p, size, colour){
+  const key = colour ? `${size}|${colour}` : size;
+  return p.variants[key] || "in_stock";
+}
+function cartCount(){ return state.cart.reduce((s,i)=>s+i.qty,0); }
+function updateBadge(){
+  const b = document.getElementById("cartBadge");
+  const c = cartCount();
+  b.style.display = c>0 ? "flex" : "none";
+  b.textContent = c;
+}
+function goTo(page, category){
+  state.page = page;
+  state.categoryFilter = category || null;
+  state.activeProduct = null;
+  render();
+  window.scrollTo(0,0);
+}
+function onSearch(v){ state.search = v; if(state.page!=="shop") state.page="shop"; render(); }
+
+function openProduct(slug){ state.activeProduct = slug; render(); }
+function closeProduct(){ state.activeProduct = null; render(); }
+
+function addToCart(slug, size, colour, qty){
+  const p = findProduct(slug);
+  const status = stockFor(p, size, colour);
+  if(status === "out_of_stock"){ alert("That size/colour is out of stock."); return; }
+  const key = slug+"|"+size+"|"+(colour||"");
+  const existing = state.cart.find(i=>i.key===key);
+  if(existing){ existing.qty += qty; }
+  else state.cart.push({ key, slug, name:p.name, price:p.price, size, colour:colour||"", qty, img:p.img, isPreorder: status==="preorder" });
+  updateBadge();
+  alert((status==="preorder" ? "Added as a pre-order: " : "Added to cart: ") + p.name + " (" + size + (colour?"/"+colour:"") + ")");
+}
+function removeFromCart(key){ state.cart = state.cart.filter(i=>i.key!==key); render(); updateBadge(); }
+function changeQty(key, delta){
+  const item = state.cart.find(i=>i.key===key);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0) state.cart = state.cart.filter(i=>i.key!==key);
+  render(); updateBadge();
+}
+function cartSubtotal(){ return state.cart.reduce((s,i)=>s+i.price*i.qty,0); }
+
+function deliveryQuote(tier, size, paymentMethod){
+  if(!tier || !size) return { fee:0, surcharge:0 };
+  const fee = (LOCATION_RATES[ACCOUNT_TYPE][tier] && LOCATION_RATES[ACCOUNT_TYPE][tier][size]) || 0;
+  const surchargeApplies = paymentMethod === "cash" && ACCOUNT_TYPE === "standard";
+  const surcharge = surchargeApplies ? Math.round((cartSubtotal()+fee) * COD_SURCHARGE_PCT) / 100 : 0;
+  return { fee, surcharge };
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const app = document.getElementById("app");
+  if(state.activeProduct){ app.innerHTML = ""; renderProductOverlay(state.activeProduct); }
+  const overlays = document.querySelectorAll(".overlay-container");
+  overlays.forEach(o=>o.remove());
+
+  let html = "";
+  if(state.page==="home") html = renderHome();
+  else if(state.page==="shop") html = renderShop();
+  else if(state.page==="cart") html = renderCartPage();
+  else if(state.page==="checkout") html = renderCheckout();
+  else if(state.page==="oway") html = renderOWay();
+  else if(state.page==="confirmation") html = renderConfirmation();
+  app.innerHTML = html;
+  updateBadge();
+
+  document.querySelectorAll("nav.desktop a").forEach(a=>a.classList.remove("active"));
+}
+
+function renderHome(){
+  const featured = PRODUCTS.filter(p=>p.featured).slice(0,4);
+  const newArr = PRODUCTS.filter(p=>p.isNew).slice(0,4);
+  return `
+  <section class="hero"><div class="container hero-inner">
+    <div>
+      <p class="eyebrow">Trinidad &amp; Tobago Fashion</p>
+      <h1>Drea Online Fashion</h1>
+      <p class="tagline">Style made for you. Discover your next favorite look.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-brass" onclick="goTo('shop')">Shop Now</button>
+        <button class="btn" style="border:1px solid rgba(250,247,241,.5);color:#fff;" onclick="goTo('shop')">Explore New Arrivals</button>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=80" alt="hero"/>
+  </div></section>
+
+  <section class="pad container">
+    <div class="section-head"><h2>Shop by Category</h2></div>
+    <div class="cats">
+      <div class="cat-card" onclick="goTo('shop')">New Arrivals</div>
+      <div class="cat-card" onclick="goTo('shop','dresses')">Dresses</div>
+      <div class="cat-card" onclick="goTo('shop','jumpsuits')">Jumpsuits</div>
+      <div class="cat-card" onclick="goTo('shop','sets')">Sets</div>
+      <div class="cat-card" onclick="goTo('shop')">Tops</div>
+      <div class="cat-card" onclick="goTo('shop')">Bottoms</div>
+    </div>
+  </section>
+
+  <section class="pad container">
+    <div class="section-head"><h2>Featured Styles</h2><a onclick="goTo('shop')" style="font-size:13px;color:var(--forest);text-transform:uppercase;">View All</a></div>
+    <div class="grid">${featured.map(cardHtml).join("")}</div>
+  </section>
+
+  <section class="pad container">
+    <div class="section-head"><h2>New Arrivals</h2><a onclick="goTo('shop')" style="font-size:13px;color:var(--forest);text-transform:uppercase;">View All</a></div>
+    <div class="grid">${newArr.map(cardHtml).join("")}</div>
+  </section>
+
+  <section class="pad container" style="text-align:center;border-top:1px solid var(--line);">
+    <p class="eyebrow" style="color:var(--brass-dark);">Follow Along</p>
+    <h2 style="margin-bottom:20px;">Follow @drea_online_fashion</h2>
+    <button class="btn btn-outline">View on Instagram</button>
+  </section>
+  `;
+}
+
+function cardHtml(p){
+  const anyPreorder = p.sizes.some(s=>stockFor(p,s,p.colours[0]||"")==="preorder");
+  const allOut = p.sizes.every(s=>stockFor(p,s,p.colours[0]||"")==="out_of_stock");
+  return `
+    <div class="card" onclick="openProduct('${p.slug}')">
+      <div class="img-wrap">
+        <img src="${p.img}" alt="${p.name}"/>
+        ${p.isNew ? '<span class="tag">New</span>' : ''}
+        ${allOut ? '<span class="stock-strip out">Out of Stock</span>' : (anyPreorder ? '<span class="stock-strip preorder">Pre-Order Available</span>' : '')}
+      </div>
+      <div class="card-info">
+        <p class="name">${p.name}</p>
+        <p class="price">${money(p.price)}</p>
+      </div>
+    </div>`;
+}
+
+function renderShop(){
+  let items = PRODUCTS;
+  if(state.categoryFilter) items = items.filter(p=>p.category===state.categoryFilter);
+  if(state.search) items = items.filter(p=>p.name.toLowerCase().includes(state.search.toLowerCase()));
+  return `
+  <div class="container pad">
+    <h1 style="margin-bottom:6px;">${state.categoryFilter ? state.categoryFilter[0].toUpperCase()+state.categoryFilter.slice(1) : "Shop All"}</h1>
+    <p style="color:var(--taupe);font-size:13px;margin-bottom:24px;">${items.length} item${items.length===1?'':'s'}</p>
+    ${items.length===0 ? '<p style="color:var(--taupe);">No products found.</p>' : `<div class="grid">${items.map(cardHtml).join("")}</div>`}
+  </div>`;
+}
+
+function renderProductOverlay(slug){
+  const p = findProduct(slug);
+  if(!p) return;
+  const overlayDiv = document.createElement("div");
+  overlayDiv.className = "overlay overlay-container center";
+  overlayDiv.innerHTML = `
+    <div class="panel wide" style="max-width:900px;">
+      <div class="panel-head"><h3>${p.name}</h3><button class="close-btn" onclick="closeProduct()">&times;</button></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+        <img src="${p.img}" style="width:100%;aspect-ratio:3/4;object-fit:cover;"/>
+        <div>
+          <p style="font-size:22px;font-weight:700;color:var(--forest-dark);margin-bottom:12px;">${money(p.price)}</p>
+          <p style="font-size:14px;color:rgba(29,27,24,.8);margin-bottom:18px;">${p.desc}</p>
+          ${p.colours.length ? `
+          <p class="eyebrow">Colour</p>
+          <div class="pill-group" id="colourPills" style="margin-bottom:16px;">
+            ${p.colours.map((c,i)=>`<button class="pill ${i===0?'active':''}" data-colour="${c}" onclick="selectColour(this,'${slug}')">${c}</button>`).join("")}
+          </div>` : ''}
+          <p class="eyebrow">Select Size</p>
+          <div class="pill-group" id="sizePills" style="margin-bottom:10px;">
+            ${p.sizes.map(s=>{
+              const status = stockFor(p, s, p.colours[0]||"");
+              const disabled = status==="out_of_stock";
+              return `<button class="pill ${disabled?'disabled':''}" data-size="${s}" onclick="${disabled?'':`selectSize(this,'${slug}')`}">${s}</button>`;
+            }).join("")}
+          </div>
+          <p id="stockLabel" style="font-size:12px;color:var(--taupe);margin-bottom:16px;">Select a size to see availability</p>
+          <p class="eyebrow">Quantity</p>
+          <div class="cart-line qty" style="border:1px solid var(--line);width:fit-content;margin-bottom:20px;">
+            <button onclick="qtyStep(-1)">−</button><span id="qtyVal" style="padding:0 10px;">1</span><button onclick="qtyStep(1)">+</button>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-primary" style="flex:1;" onclick="submitAdd('${slug}')">Add to Cart</button>
+            <button class="btn btn-brass" style="flex:1;" onclick="submitAdd('${slug}', true)">Buy Now</button>
+          </div>
+          <p class="notice-box">Please note: some items are sourced after an order is placed. Availability will be confirmed after your order is received.</p>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(overlayDiv);
+  window._qty = 1;
+  window._selSize = null;
+  window._selColour = p.colours[0] || "";
+}
+function qtyStep(d){ window._qty = Math.max(1, (window._qty||1)+d); document.getElementById("qtyVal").textContent = window._qty; }
+function selectColour(el, slug){
+  document.querySelectorAll("#colourPills .pill").forEach(b=>b.classList.remove("active"));
+  el.classList.add("active");
+  window._selColour = el.dataset.colour;
+  updateStockLabel(slug);
+}
+function selectSize(el, slug){
+  document.querySelectorAll("#sizePills .pill").forEach(b=>b.classList.remove("active"));
+  el.classList.add("active");
+  window._selSize = el.dataset.size;
+  updateStockLabel(slug);
+}
+function updateStockLabel(slug){
+  const p = findProduct(slug);
+  if(!window._selSize){ return; }
+  const status = stockFor(p, window._selSize, window._selColour);
+  const label = document.getElementById("stockLabel");
+  const map = { in_stock:"In Stock", preorder:"Available to Pre-Order", out_of_stock:"Out of Stock" };
+  label.textContent = map[status];
+  label.style.color = status==="in_stock" ? "#243B2E" : status==="preorder" ? "#8F6A2F" : "#A23B33";
+}
+function submitAdd(slug, buyNow){
+  if(!window._selSize){ alert("Please select your size before ordering."); return; }
+  addToCart(slug, window._selSize, window._selColour, window._qty||1);
+  closeProduct();
+  if(buyNow) goTo("cart");
+}
+
+function renderCartPage(){
+  if(state.cart.length===0){
+    return `<div class="container pad" style="text-align:center;padding:100px 0;">
+      <h2 style="margin-bottom:10px;">Your cart is empty</h2>
+      <p style="color:var(--taupe);margin-bottom:24px;">Browse the shop to find your next favorite look.</p>
+      <button class="btn btn-primary" onclick="goTo('shop')">Continue Shopping</button>
+    </div>`;
+  }
+  const subtotal = cartSubtotal();
+  return `<div class="container pad" style="display:grid;grid-template-columns:1fr 340px;gap:40px;">
+    <div>
+      <h1 style="margin-bottom:24px;">Your Cart</h1>
+      ${state.cart.map(i=>`
+        <div class="cart-line">
+          <img src="${i.img}"/>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;">
+              <div>
+                <p style="font-size:14px;">${i.name}</p>
+                <p style="font-size:12px;color:var(--taupe);">Size: ${i.size}${i.colour?' · Colour: '+i.colour:''}</p>
+                ${i.isPreorder ? '<span class="badge-chip">Pre-Order</span>' : ''}
+              </div>
+              <p style="font-weight:700;font-size:14px;">${money(i.price*i.qty)}</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:8px;">
+              <div class="qty"><button onclick="changeQty('${i.key}',-1)">−</button><span style="padding:0 8px;">${i.qty}</span><button onclick="changeQty('${i.key}',1)">+</button></div>
+              <button onclick="removeFromCart('${i.key}')" style="background:none;border:none;color:var(--taupe);font-size:12px;text-decoration:underline;cursor:pointer;">Remove</button>
+            </div>
+          </div>
+        </div>`).join("")}
+    </div>
+    <div style="border:1px solid var(--line);padding:24px;height:fit-content;">
+      <p class="eyebrow">Order Summary</p>
+      <div class="summary-line"><span>Subtotal</span><span>${money(subtotal)}</span></div>
+      <p style="font-size:12px;color:var(--taupe);margin:8px 0 16px;">Delivery fee calculated at checkout via oDeliver.</p>
+      <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" onclick="goTo('checkout')">Proceed to Checkout</button>
+      <button class="btn btn-outline" style="width:100%;" onclick="goTo('shop')">Continue Shopping</button>
+    </div>
+  </div>`;
+}
+
+function renderCheckout(){
+  if(state.cart.length===0) return `<div class="container pad"><p>Your cart is empty. <a onclick="goTo('shop')" style="color:var(--forest);text-decoration:underline;">Go shopping</a></p></div>`;
+  const subtotal = cartSubtotal();
+  return `<div class="container pad">
+    <h1 style="margin-bottom:24px;">Checkout</h1>
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;">
+      <div>
+        <p class="eyebrow">Customer Information</p>
+        <div class="row2">
+          <div class="field"><label>Full Name <span class="req">*</span></label><input id="ck_name"/></div>
+          <div class="field"><label>Phone Number <span class="req">*</span></label><input id="ck_phone"/></div>
+          <div class="field"><label>Email (optional)</label><input id="ck_email"/></div>
+          <div class="field"><label>WhatsApp (optional)</label><input id="ck_whatsapp"/></div>
+        </div>
+
+        <p class="eyebrow" style="margin-top:24px;">Delivery Information</p>
+        <div class="pill-group" style="margin-bottom:14px;">
+          <label class="pill active" style="display:flex;gap:6px;align-items:center;"><input type="radio" name="ckDelivery" value="local" checked onchange="ckDeliveryChange(this)"> Local Delivery (oDeliver)</label>
+          <label class="pill" style="display:flex;gap:6px;align-items:center;"><input type="radio" name="ckDelivery" value="pickup" onchange="ckDeliveryChange(this)"> Pickup</label>
+        </div>
+        <div id="ckOdeliverFields" class="row2" style="margin-bottom:14px;">
+          <div class="field"><label>Delivery Area *</label>
+            <select id="ck_tier" onchange="recalcCheckout()">
+              <option value="">Select your area</option>
+              ${Object.entries(TIER_LABELS).map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}
+            </select>
+          </div>
+          <div class="field"><label>Parcel Size *</label>
+            <select id="ck_size" onchange="recalcCheckout()">
+              <option value="small">Small Parcel</option>
+              <option value="medium">Medium Parcel</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field" style="grid-column:span 2;"><label>Address</label><input id="ck_address"/></div>
+          <div class="field"><label>Community / Area</label><input id="ck_community"/></div>
+          <div class="field"><label>City / Town</label><input id="ck_city"/></div>
+        </div>
+
+        <p class="eyebrow" style="margin-top:24px;">Payment Method</p>
+        <label class="pill active" style="display:flex;gap:8px;align-items:center;width:fit-content;margin-bottom:8px;padding:12px 16px;"><input type="radio" name="ckPay" value="cash" checked onchange="recalcCheckout()"> Cash on Delivery / Pickup</label><br/>
+        <label class="pill" style="display:flex;gap:8px;align-items:center;width:fit-content;padding:12px 16px;"><input type="radio" name="ckPay" value="card" onchange="recalcCheckout()"> Card (secure payment link sent after ordering)</label>
+        <p style="font-size:12px;color:var(--taupe);margin-top:8px;">We never collect card numbers on this site — card orders get a secure payment link afterward.</p>
+      </div>
+
+      <div style="border:1px solid var(--line);padding:24px;height:fit-content;">
+        <p class="eyebrow">Order Summary</p>
+        <div class="summary-line"><span>Subtotal</span><span>${money(subtotal)}</span></div>
+        <div class="summary-line"><span>Delivery Fee (oDeliver)</span><span id="ck_feeDisplay">${money(0)}</span></div>
+        <div class="summary-line" id="ck_surchargeLine" style="display:none;"><span>COD Service Charge (3%)</span><span id="ck_surchargeDisplay">${money(0)}</span></div>
+        <div class="summary-line total"><span>Total</span><span id="ck_totalDisplay">${money(subtotal)}</span></div>
+        <button class="btn btn-primary" style="width:100%;margin-top:16px;" onclick="placeOrderDemo()">Place Order</button>
+      </div>
+    </div>
+  </div>`;
+}
+function ckDeliveryChange(el){
+  document.getElementById("ckOdeliverFields").style.display = el.value==="pickup" ? "none" : "grid";
+  recalcCheckout();
+}
+function recalcCheckout(){
+  const tier = document.getElementById("ck_tier") ? document.getElementById("ck_tier").value : "";
+  const size = document.getElementById("ck_size") ? document.getElementById("ck_size").value : "small";
+  const pay = document.querySelector('input[name="ckPay"]:checked').value;
+  const isPickup = document.querySelector('input[name="ckDelivery"]:checked').value === "pickup";
+  const q = isPickup ? {fee:0,surcharge:0} : deliveryQuote(tier, size, pay);
+  document.getElementById("ck_feeDisplay").textContent = money(q.fee);
+  const total = cartSubtotal() + q.fee + q.surcharge;
+  document.getElementById("ck_totalDisplay").textContent = money(total);
+  const surchargeLine = document.getElementById("ck_surchargeLine");
+  if(q.surcharge > 0){ surchargeLine.style.display="flex"; document.getElementById("ck_surchargeDisplay").textContent = money(q.surcharge); }
+  else surchargeLine.style.display = "none";
+}
+function placeOrderDemo(){
+  const name = document.getElementById("ck_name").value;
+  const phone = document.getElementById("ck_phone").value;
+  if(!name || !phone){ alert("Please enter your name and phone number."); return; }
+  state.lastOrderNumber = "DREA-2026-" + String(Math.floor(1000+Math.random()*9000));
+  state.cart = [];
+  updateBadge();
+  goTo("confirmation");
+}
+
+function renderConfirmation(){
+  return `<div class="container pad" style="max-width:600px;text-align:center;">
+    <div style="width:56px;height:56px;border-radius:999px;background:var(--forest);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;">✓</div>
+    <p class="eyebrow">Order Received!</p>
+    <h1 style="margin-bottom:10px;">Thank you for shopping with Drea Online Fashion</h1>
+    <p style="color:var(--taupe);">Your order number is <strong style="color:var(--charcoal);">${state.lastOrderNumber || 'DREA-2026-0001'}</strong></p>
+    <p style="margin:16px 0 30px;">We will contact you to confirm availability, delivery details and payment arrangements.</p>
+    <p style="font-size:12px;color:var(--taupe);margin-bottom:24px;">In the live app, this order (and a Discord notification) is created server-side — this preview only simulates it.</p>
+    <button class="btn btn-primary" onclick="goTo('shop')">Continue Shopping</button>
+  </div>`;
+}
+
+function renderOWay(){
+  return `<div class="container pad" style="max-width:700px;">
+    <p class="eyebrow">Not Just Our Catalog</p>
+    <h1 style="margin-bottom:10px;">Order What You Want</h1>
+    <p style="color:var(--taupe);margin-bottom:28px;">Seen something on Fashion Nova, Amazon, or anywhere else? Send us the details and we'll source it for you.</p>
+    <div class="field"><label>Item Description <span class="req">*</span></label><textarea rows="3" placeholder="e.g. Fashion Nova 'Snatched' bodysuit, black, size M"></textarea></div>
+    <div class="field"><label>Product Link (optional)</label><input placeholder="https://..."/></div>
+    <div class="row2">
+      <div class="field"><label>Quantity</label><input type="number" value="1" min="1"/></div>
+      <div class="field"><label>Estimated Price (TT$, optional)</label><input type="number" placeholder="Not sure? Leave blank"/></div>
+    </div>
+    <p class="eyebrow" style="margin-top:20px;">Your Information</p>
+    <div class="row2">
+      <div class="field"><label>Full Name *</label><input/></div>
+      <div class="field"><label>Phone Number *</label><input/></div>
+    </div>
+    <p class="eyebrow" style="margin-top:10px;">Payment</p>
+    <label class="pill active" style="display:flex;gap:8px;align-items:center;width:fit-content;padding:12px 16px;margin-bottom:16px;"><input type="radio" name="owayPay" checked> Cash</label>
+    <button class="btn btn-primary" onclick="alert('In the live app, this submits your request and notifies the owner on Discord.')">Submit Request</button>
+  </div>`;
+}
+
+render();
+</script>
+</body>
+</html>

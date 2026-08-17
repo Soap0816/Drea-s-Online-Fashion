@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#2F4B3A"/>
+  <g fill="none" stroke="#D2A45E" stroke-width="1.5" opacity="0.6">
+    <path d="M320 340 L400 280 L480 340 L480 420 L320 420 Z"/>
+    <path d="M350 420 L335 740 L465 740 L450 420"/>
+    <circle cx="400" cy="250" r="26"/>
+  </g>
+  <text x="400" y="900" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#D2A45E" opacity="0.8">
+    Replace with your hero photograph
+  </text>
+</svg>

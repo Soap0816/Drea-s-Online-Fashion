@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ivory text-charcoal font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-normal;
+  }
+  a, button {
+    @apply outline-none;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    @apply ring-2 ring-forest ring-offset-2 ring-offset-ivory rounded-sm;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-xs tracking-wideish uppercase text-brass-dark font-semibold;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-forest text-ivory px-7 py-3.5 text-sm tracking-wide uppercase font-semibold hover:bg-forest-dark transition-colors duration-200;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-charcoal text-charcoal px-7 py-3.5 text-sm tracking-wide uppercase font-semibold hover:bg-charcoal hover:text-ivory transition-colors duration-200;
+  }
+  .btn-brass {
+    @apply inline-flex items-center justify-center gap-2 bg-brass text-ivory px-7 py-3.5 text-sm tracking-wide uppercase font-semibold hover:bg-brass-dark transition-colors duration-200;
+  }
+  .container-page {
+    @apply mx-auto max-w-content px-5 sm:px-8 lg:px-12;
+  }
+}
