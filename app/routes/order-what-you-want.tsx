@@ -5,7 +5,7 @@ import type { Env } from "~/lib/env.server";
 import { getSettings } from "~/lib/db.server";
 import { createCustomOrder, type CustomOrderInput } from "~/lib/custom-orders.server";
 import { notifyNewCustomOrder } from "~/lib/notifications.server";
-import { quoteDelivery } from "~/lib/delivery.server";
+import { quoteDelivery } from "~/lib/delivery";
 import { formatMoney, dollarsToCents } from "~/lib/money";
 import { LOCATION_TIER_LABELS, SHIPMENT_SIZE_LABELS, type LocationTier, type ShipmentSize } from "~/lib/types";
 

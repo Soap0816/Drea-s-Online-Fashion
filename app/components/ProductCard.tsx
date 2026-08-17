@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import type { Product } from "~/lib/types";
 import { formatMoney } from "~/lib/money";
-import { imageUrl } from "~/lib/db.server";
+import { imageUrl } from "~/lib/image";
 
 const AVAILABILITY_LABEL: Record<Product["availability"], string> = {
   available: "Available to Order",

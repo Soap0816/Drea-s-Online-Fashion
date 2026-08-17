@@ -266,9 +266,3 @@ export async function getSettings(env: Env): Promise<Settings> {
     delivery_rates: deliveryRates,
   };
 }
-
-/** Resolves an R2 image key to a public URL served by the images route. */
-export function imageUrl(imageKey: string | undefined | null): string {
-  if (!imageKey) return "/images/placeholder-product.svg";
-  return `/images/${imageKey}`;
-}

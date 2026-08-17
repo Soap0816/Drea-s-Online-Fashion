@@ -3,7 +3,7 @@ import { Link, useFetcher } from "@remix-run/react";
 import type { Product } from "~/lib/types";
 import { resolveStockStatus } from "~/lib/types";
 import { formatMoney } from "~/lib/money";
-import { imageUrl } from "~/lib/db.server";
+import { imageUrl } from "~/lib/image";
 import { showToast } from "~/components/Toast";
 
 const STOCK_LABEL: Record<string, string> = {

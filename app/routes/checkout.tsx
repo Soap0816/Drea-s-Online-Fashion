@@ -6,7 +6,7 @@ import { getCart, serializeCart } from "~/lib/cart.server";
 import { resolveCart } from "~/lib/cart-resolve.server";
 import { getSettings } from "~/lib/db.server";
 import { createOrder, type CheckoutInput } from "~/lib/orders.server";
-import { quoteDelivery } from "~/lib/delivery.server";
+import { quoteDelivery } from "~/lib/delivery";
 import { notifyNewOrder } from "~/lib/notifications.server";
 import { formatMoney } from "~/lib/money";
 import { LOCATION_TIER_LABELS, SHIPMENT_SIZE_LABELS, type LocationTier, type ShipmentSize } from "~/lib/types";

@@ -3,7 +3,8 @@ import { Form, Link, useLoaderData, useNavigation } from "@remix-run/react";
 import type { Env } from "~/lib/env.server";
 import { getCart, serializeCart, updateCartQuantity, removeFromCart } from "~/lib/cart.server";
 import { resolveCart } from "~/lib/cart-resolve.server";
-import { getSettings, imageUrl } from "~/lib/db.server";
+import { getSettings } from "~/lib/db.server";
+import { imageUrl } from "~/lib/image";
 import { formatMoney } from "~/lib/money";
 
 export const meta: MetaFunction = () => [{ title: "Your Cart — Drea Online Fashion" }];

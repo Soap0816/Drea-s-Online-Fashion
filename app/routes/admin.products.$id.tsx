@@ -13,7 +13,7 @@ import {
   type ProductInput,
 } from "~/lib/admin-db.server";
 import { slugify } from "~/lib/slug";
-import { imageUrl } from "~/lib/db.server";
+import { imageUrl } from "~/lib/image";
 import { ProductFormFields } from "~/components/ProductFormFields";
 import { VariantStockGrid } from "~/components/VariantStockGrid";
 

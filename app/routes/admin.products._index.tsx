@@ -3,7 +3,8 @@ import { Form, Link, useLoaderData, useSearchParams, useNavigation } from "@remi
 import type { Env } from "~/lib/env.server";
 import { requireAdmin } from "~/lib/auth.server";
 import { listAllProductsAdmin, setProductHidden, deleteProduct } from "~/lib/admin-db.server";
-import { getSettings, imageUrl } from "~/lib/db.server";
+import { getSettings } from "~/lib/db.server";
+import { imageUrl } from "~/lib/image";
 import { formatMoney } from "~/lib/money";
 import { CATEGORY_LABELS } from "~/lib/types";
 
