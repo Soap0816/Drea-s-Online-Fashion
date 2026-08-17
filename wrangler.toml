@@ -1,4 +1,4 @@
-name = "drea-online-fashion"
+name = "drea-s-online-fashion"
 compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./build/client"
@@ -9,7 +9,7 @@ pages_build_output_dir = "./build/client"
 [[d1_databases]]
 binding = "DB"
 database_name = "drea_db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "cfe3feaf-678a-419b-9b1c-ffd414be571b"
 
 # --- Image storage (Cloudflare R2) ---
 # Create with: wrangler r2 bucket create drea-product-images
