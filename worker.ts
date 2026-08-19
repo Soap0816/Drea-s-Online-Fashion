@@ -1,5 +1,6 @@
 import { createRequestHandler } from "@remix-run/cloudflare";
 import * as build from "./build/server";
+import type { Env } from "./app/lib/env.server";
 
 const handleRequest = createRequestHandler(build, "production");
 
