@@ -2,15 +2,15 @@
   "name": "drea-online-fashion",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "remix vite:dev",
-    "build": "remix vite:build",
-    "start": "wrangler dev",
-    "typecheck": "tsc",
-    "deploy": "npm run build && wrangler deploy",
-    "db:migrate:local": "wrangler d1 migrations apply drea_db --local",
-    "db:migrate:remote": "wrangler d1 migrations apply drea_db --remote",
-    "db:seed:local": "wrangler d1 execute drea_db --local --file=./seed/seed.sql",
-    "db:seed:remote": "wrangler d1 execute drea_db --remote --file=./seed/seed.sql"
-  }
+"scripts": {
+  "dev": "remix vite:dev",
+  "build": "remix vite:build",
+  "start": "wrangler dev",
+  "typecheck": "tsc",
+  "deploy": "npm run build && wrangler deploy",
+  "db:migrate:local": "wrangler d1 migrations apply drea_db --local",
+  "db:migrate:remote": "wrangler d1 migrations apply drea_db --remote",
+  "db:seed:local": "wrangler d1 execute drea_db --local --file=./seed/seed.sql",
+  "db:seed:remote": "wrangler d1 execute drea_db --remote --file=./seed/seed.sql"
+}
 }
