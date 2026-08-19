@@ -11,10 +11,3 @@ directory = "./build/client"
 binding = "DB"
 database_name = "drea_db"
 database_id = "cfe3feaf-678a-419b-9b1c-ffd414be571b"
-
-[[r2_buckets]]
-binding = "PRODUCT_IMAGES"
-bucket_name = "drea-product-images"
-
-[vars]
-SITE_URL = "https://dreaonlinefashion.com"
